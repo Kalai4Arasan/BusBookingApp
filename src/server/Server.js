@@ -1,7 +1,17 @@
 const express=require("express")
 const app=express()
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+/*this below code is very Important to prevent CORS error in my task*/ 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 server=app.listen(process.env.PORT | 4200 ,()=>{
-    console.log("Connected to the server...");
+    console.log("Connected to the server...",process.env.PORT | 4200);
 })
 
 const mongo=require('mongoose');
@@ -21,21 +31,41 @@ userModel=new Schema({
   });
 
 var User = mongo.model('user',userModel,'User');
-app.post('/signup',(req,res)=>{
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    data=new User({
-        name:'kalai',
-        email:'kalai@gmail.com',
-        password:'123456789',
-        phone:1234567890,
-        address:'Salem,Tamilnadu'
-    })
-    data.save()
-    console.log("success");
+app.post('/register',(req,res)=>{
+    //console.log(req.body)
+    iname=req.body.User.username
+    iemail=req.body.User.email
+    iphone=req.body.User.phone
+    iaddress=req.body.User.address
+    ipassword=req.body.User.password
+    console.log(req.body.User)
+    User.findOne({$or:[{name:iname},{email:iemail}]},(err,result)=>{
+        console.log(result)
+        if(result==null){
+            data=new User({
+                name:iname,
+                email:iemail,
+                password:ipassword,
+                phone:iphone,
+                address:iaddress
+            })
+            data.save()
+            console.log(data)
+            res.status(200).send(data)
+        }
+        else{
+            res.status(200).send([])
+        }
+        })
+    
 })
 
-app.get('/signin',(req,res)=>{
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    User.findOne({name:})
-    console.log("success");
+app.post('/login',(req,res)=>{
+    iname=req.body.User.username
+    ipassword=req.body.User.password
+
+    User.findOne({$or:[{name:iname},{email:iname}],password:ipassword},(err,result)=>{
+        //console.log(result)
+        res.status(200).send(result)
+        })
 })

@@ -10,11 +10,38 @@ import HireBus from '../MainComponents/HireBus';
 import BookTickets from '../MainComponents/BookTickets';
 import Login from '../AuthComponents/Login';
 import Register from '../AuthComponents/Register';
+import Profile from '../MainComponents/Profile';
 // import {ReactComponent as BusLogo} from '../../assets/svg/bus.svg';
 class NavBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            data:JSON.parse(sessionStorage.getItem('User'))
+         }
+         console.log(this.state.data)
+         this.button=this.state.data==null || Object.keys(this.state.data).length==0 ?
+         <span class="ui item">
+                     <div class="dropdown">
+                         <span class="ui item"><i class="user icon"></i>Account </span>
+                         <div class="dropdown-content">
+                        <Link to="/login" >Login</Link>
+                        <Link to="/register">SignUp</Link>
+                         </div>
+                      </div>
+                 </span>
+         :<span class="ui item">
+                     <div class="dropdown">
+                         <span class="ui item"><i class="user icon"></i>{this.state.data.name} </span>
+                         <div class="dropdown-content">
+                          <Link to="/account" >Profile</Link>
+                          <a onClick={this.logoutHandler} style={{cursor:'pointer'}}>LogOut</a>
+                         </div>
+                      </div>
+                 </span>
+    }
+    logoutHandler=()=>{
+        sessionStorage.removeItem('User');
+        window.location.reload();
     }
     componentDidMount(){
         $("#buttonMenu").click(function (){
@@ -30,23 +57,7 @@ class NavBar extends Component {
     }
 
 
-      button=()=>{
-        if(true){
-            return <span class="ui item">
-                        <div class="dropdown">
-                            <span class="ui item"><i class="user icon"></i>Account <i class="dropdown icon"></i></span>
-                            <div class="dropdown-content">
-                           <Link to="/login" >Login</Link>
-                           <Link to="/register">SignUp</Link>
-                            </div>
-                         </div>
-                    </span>
-            }
-        else{
-            return <span class="ui item">user</span>
-        }
-    }
-    render() { 
+    render() {
         return ( 
             <Router>
             <div class="ui grid computer only  inverted  menu" style={{borderRadius:'0',backgroundColor:'rgb(65, 64, 64)'}}>
@@ -70,7 +81,7 @@ class NavBar extends Component {
                     <i class="search link icon"></i>
                 </div>
                 </div>
-               { this.button() }
+               { this.button }
             </div>
             </div>
             <div class="ui grid mobile only" style={{borderRadius:'0',backgroundColor:'rgb(65, 64, 64)',margin:'0'}}>
@@ -100,7 +111,7 @@ class NavBar extends Component {
                         <input type="text" placeholder="Search..."/>
                         <i class="search link icon"></i>
                     </div>
-                    { this.button() }
+                    { this.button }
                     </div>
                     
                 </div>
@@ -123,6 +134,9 @@ class NavBar extends Component {
             </Route>
             <Route path="/register">
                 <Register/>
+            </Route>
+            <Route path="/account">
+                <Profile/>
             </Route>
         </Switch>
         
