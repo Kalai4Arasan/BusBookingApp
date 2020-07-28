@@ -35,9 +35,11 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .dropdown-content {
+  margin-top: 2%;
   display: none;
   position: absolute;
   background-color: rgb(65, 64, 64);

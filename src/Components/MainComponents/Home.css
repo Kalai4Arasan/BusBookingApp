@@ -1,0 +1,19 @@
+.inputSearchBar{
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+select:required:invalid {
+    color: gray;
+  }
+  option[value=""][disabled] {
+    display: none;
+  }
+  option {
+    color: black;
+  }
+  
+  .gold{
+    color:#FFD700;
+  }

@@ -26,7 +26,7 @@ class Login extends Component {
         let value=e.target.value
         switch(inputname){
             case "username":
-                this.state.errors.username=value!=null && value.length>0 ?'':"Name Filed Must be required";
+                this.state.errors.username=value!=null && value.length>0 ?'':"Name Field Must be required";
                 break
             case "password":
                 this.state.errors.password=value!=null && value.length>6 ?'':"Password must be atleast 6 character";

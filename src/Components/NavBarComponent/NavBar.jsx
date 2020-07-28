@@ -11,6 +11,7 @@ import BookTickets from '../MainComponents/BookTickets';
 import Login from '../AuthComponents/Login';
 import Register from '../AuthComponents/Register';
 import Profile from '../MainComponents/Profile';
+import ShowAvailableBuses from '../TasksComponents/ShowAvailableBuses';
 // import {ReactComponent as BusLogo} from '../../assets/svg/bus.svg';
 class NavBar extends Component {
     constructor(props) {
@@ -18,11 +19,11 @@ class NavBar extends Component {
         this.state = { 
             data:JSON.parse(sessionStorage.getItem('User'))
          }
-         console.log(this.state.data)
+        //  console.log(this.state.data)
          this.button=this.state.data==null || Object.keys(this.state.data).length==0 ?
          <span class="ui item">
                      <div class="dropdown">
-                         <span class="ui item"><i class="user icon"></i>Account </span>
+                         <span class="ui " ><i class="user icon"></i>Account </span>
                          <div class="dropdown-content">
                         <Link to="/login" >Login</Link>
                         <Link to="/register">SignUp</Link>
@@ -31,7 +32,7 @@ class NavBar extends Component {
                  </span>
          :<span class="ui item">
                      <div class="dropdown">
-                         <span class="ui item"><i class="user icon"></i>{this.state.data.name} </span>
+                         <span class="ui"><i class="user icon"></i>{this.state.data.name} </span>
                          <div class="dropdown-content">
                           <Link to="/account" >Profile</Link>
                           <a onClick={this.logoutHandler} style={{cursor:'pointer'}}>LogOut</a>
@@ -75,12 +76,6 @@ class NavBar extends Component {
                 HireBus
             </Link>
             <div class="right menu">
-                <div class="item">
-                <div class="ui icon input">
-                    <input type="text" placeholder="Search..."/>
-                    <i class="search link icon"></i>
-                </div>
-                </div>
                { this.button }
             </div>
             </div>
@@ -105,12 +100,8 @@ class NavBar extends Component {
                 <Link to="/hirebus" class="item">
                     HireBus
                 </Link>
-            <div class="right menu">
+            <div class="right">
                     <div class="item">
-                    <div class="ui icon input">
-                        <input type="text" placeholder="Search..."/>
-                        <i class="search link icon"></i>
-                    </div>
                     { this.button }
                     </div>
                     

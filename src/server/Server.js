@@ -15,6 +15,7 @@ server=app.listen(process.env.PORT | 4200 ,()=>{
 })
 
 const mongo=require('mongoose');
+const { data } = require("jquery");
 //const { data } = require("jquery");
 var Schema = mongo.Schema;
 mongo.connect('mongodb://localhost:27017/BusBookingApp', {useNewUrlParser: true});
@@ -30,6 +31,14 @@ userModel=new Schema({
     address:String,
   });
 
+busModel=new Schema({
+    busname:String,
+    form:String,
+    to:Object,
+    type:String,
+    rating:Number,
+});
+var Bus=mongo.model('bus',busModel,'Buses');
 var User = mongo.model('user',userModel,'User');
 app.post('/register',(req,res)=>{
     //console.log(req.body)
@@ -42,7 +51,7 @@ app.post('/register',(req,res)=>{
     User.findOne({$or:[{name:iname},{email:iemail}]},(err,result)=>{
         console.log(result)
         if(result==null){
-            data=new User({
+            let data=new User({
                 name:iname,
                 email:iemail,
                 password:ipassword,
@@ -68,4 +77,25 @@ app.post('/login',(req,res)=>{
         //console.log(result)
         res.status(200).send(result)
         })
+})
+
+app.post("/available",(req,res)=>{
+    ifrom=req.body.Data.from,
+    ito=req.body.Data.to,
+    idate=req.body.Data.date,
+    Bus.find({from:ifrom},(err,result)=>{
+        let d=[];
+        for(let i of result){
+            let fl=false;
+            i['to'].forEach((item)=>{
+                if(item[0]===ito){
+                    fl=true;
+                }
+            })
+            if(fl==true){
+                d.push(i)
+            }
+        }
+        return res.send(d)
+    })
 })
