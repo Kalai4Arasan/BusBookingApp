@@ -71,21 +71,26 @@ class Register extends Component {
                 valid=false
             }
         }
-        if(valid===true && this.state.cpassword===this.state.password){
-            const User=this.state
-            console.log(User)
-            axios.post('http://localhost:4200/register',{User}).then((res)=>{
-                if(Object.keys(res.data).length>0){
-                    sessionStorage.setItem('User',JSON.stringify(res.data));
-                    this.setState({redirect:true})
-                    }
-                    else{
-                        this.setState({ferror:"Username or Email is already present"})
-                    }
-            })
+        if(valid==true && this.state.username!=null && this.state.password!=null && this.state.cpassword!=null && this.state.phone!=null && this.state.address!=null){
+            if(valid===true && this.state.cpassword===this.state.password){
+                const User=this.state
+                console.log(User)
+                axios.post('http://localhost:4200/register',{User}).then((res)=>{
+                    if(Object.keys(res.data).length>0){
+                        sessionStorage.setItem('User',JSON.stringify(res.data));
+                        this.setState({redirect:true})
+                        }
+                        else{
+                            this.setState({ferror:"Username or Email is already present"})
+                        }
+                })
+            }
+            else{
+                this.setState({ferror:'Passwords does not match each other!! '})
+            }
         }
         else{
-            this.setState({ferror:'Passwords does not match each other!! '})
+            this.setState({ferror:"All fields must be required"})
         }
     }
     render() { 

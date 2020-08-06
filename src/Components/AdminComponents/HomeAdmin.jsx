@@ -4,24 +4,17 @@ import $ from 'jquery';
 import { createBrowserHistory } from 'history';
 
 import Logo from "../../assets/images/logo.png"
-import './NavBar.css'
-import Home from '../MainComponents/Home';
-import Bookings from '../MainComponents/Bookings';
-import HireBus from '../MainComponents/HireBus';
-import BookTickets from '../MainComponents/BookTickets';
-import Login from '../AuthComponents/Login';
-import Register from '../AuthComponents/Register';
-import Profile from '../MainComponents/Profile';
-import ShowAvailableBuses from '../TasksComponents/ShowAvailableBuses';
-import BookingBus from '../TasksComponents/BookingBus';
-import Success from '../TasksComponents/Success';
-import HomeAdmin from '../AdminComponents/HomeAdmin';
-// import {ReactComponent as BusLogo} from '../../assets/svg/bus.svg';
-class NavBar extends Component {
+import '../NavBarComponent/NavBar.css'
+import LoginAdmin from '../AuthComponents/LoginAdmin';
+import ProfileAdmin from '../MainComponents/ProfileAdmin';
+import AddBus from '../MainComponents/AddBus';
+import Welcome from '../MainComponents/Welcome';
+import ShowBuses from '../MainComponents/showBuses';
+class HomeAdmin extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            data:JSON.parse(sessionStorage.getItem('User'))
+            data:JSON.parse(sessionStorage.getItem('Admin'))
          }
         //  console.log(this.state.data)
          this.button=this.state.data==null || Object.keys(this.state.data).length==0 ?
@@ -29,8 +22,8 @@ class NavBar extends Component {
                      <div class="dropdown">
                          <span class="ui " ><i class="user icon"></i>Account </span>
                          <div class="dropdown-content">
-                        <Link to="/login" >Login</Link>
-                        <Link to="/register">SignUp</Link>
+                        <Link to="/loginAdmin" >Login</Link>
+
                          </div>
                       </div>
                  </span>
@@ -38,14 +31,14 @@ class NavBar extends Component {
                      <div class="dropdown">
                          <span class="ui"><i class="user icon"></i>{this.state.data.name} </span>
                          <div class="dropdown-content">
-                          <Link to="/account" >Profile</Link>
+                          <Link to="/accountAdmin" >Profile</Link>
                           <a onClick={this.logoutHandler} style={{cursor:'pointer'}}>LogOut</a>
                          </div>
                       </div>
                  </span>
     }
     logoutHandler=()=>{
-        sessionStorage.removeItem('User');
+        sessionStorage.removeItem('Admin');
         window.location.reload();
     }
     componentDidMount(){
@@ -60,18 +53,20 @@ class NavBar extends Component {
             }
         })
     }
-    
-
-    render() {
+    render() { 
+        console.log(this.state.data)
         return ( 
             <Router >
             <div class="ui grid computer only  inverted  menu" style={{borderRadius:'0',backgroundColor:'rgb(65, 64, 64)'}}>
             <img class="active item brand"style={{backgroundColor:'rgb(65, 64, 64)'}} src={Logo} height="80" width="100"/>
-            <Link to="/" class=" active item brand-logo" style={{backgroundColor:'rgb(65, 64, 64)'}} >
+            <Link to="/admin" class=" active item brand-logo" style={{backgroundColor:'rgb(65, 64, 64)'}} >
             BookMyTrip
             </Link>
-            <Link to="/bookings" class="item">
-                Bookings
+            <Link to="/addBus" class="item">
+                    AddBus
+            </Link>
+            <Link to="/showBuses" class="item">
+                    AllBuses
             </Link>
             <div class="right menu">
                { this.button }
@@ -80,7 +75,7 @@ class NavBar extends Component {
             <div class="ui grid mobile only" style={{borderRadius:'0',backgroundColor:'rgb(65, 64, 64)',margin:'0'}}>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'center',textAlign:'center'}}>
                     <img class="brand"style={{backgroundColor:'rgb(65, 64, 64)'}} src={Logo} height="80" width="100"/>
-                    <Link to="/" class="brand-logo2" style={{backgroundColor:'rgb(65, 64, 64)',color:'white'}} >
+                    <Link to="/admin" class="brand-logo2" style={{backgroundColor:'rgb(65, 64, 64)',color:'white'}} >
                     BookMyTrip
                     </Link>
                     </div>
@@ -89,49 +84,33 @@ class NavBar extends Component {
                 <button id="buttonMenu" class="ui secondary button"><i class="th list icon"></i>Menu</button>
             </div>
             <div id="sideMenu" class="ui grid mobile only inverted vertical menu" style={{backgroundColor:'rgb(65, 64, 64)',display:'none'}}>
-                <Link to="/booktickets" class="item">
-                    BookTickets
+                <Link to="/addBus" class="item">
+                    AddBus
                 </Link>
-                <Link to="/bookings" class="item">
-                    Bookings
-                </Link>
-                <Link to="/hirebus" class="item">
-                    HireBus
+                <Link to="/showBuses" class="item">
+                    AllBuses
                 </Link>
             <div class="right">
                     <div class="item">
                     { this.button }
-                    </div>
-                    
+                    </div> 
                 </div>
             </div>
             <Switch>
-            <Route exact path="/">
-                 <Home/> 
+            <Route exact path="/admin">
+                <Welcome/>
             </Route>
-            <Route exact path="/booktickets">
-                <BookTickets/>
+            <Route exact path="/addBus">
+                <AddBus/>
             </Route>
-            <Route exact path="/bookings">
-                <Bookings/>
+            <Route exact path="/loginAdmin">
+                <LoginAdmin/>
             </Route>
-            <Route exact path="/hirebus">
-                <HireBus/>
+            <Route exact path="/accountAdmin">
+                <ProfileAdmin/>
             </Route>
-            <Route exact path="/login">
-                <Login/>
-            </Route>
-            <Route exact path="/register">
-                <Register/>
-            </Route>
-            <Route exact path="/account">
-                <Profile/>
-            </Route>
-            <Route exact path="/bookingseat">
-                <BookingBus/>
-            </Route>
-            <Route exact path="/success">
-                <Success/>
+            <Route exact path="/showBuses">
+                <ShowBuses/>
             </Route>
             </Switch>
         </Router>
@@ -139,4 +118,4 @@ class NavBar extends Component {
     }
 }
  
-export default NavBar;
+export default HomeAdmin;

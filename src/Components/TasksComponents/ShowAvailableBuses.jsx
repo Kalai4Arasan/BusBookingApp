@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Switch, Route,useHistory,useLocation } from 'react-router-dom';
 import bus from '../../assets/images/bus.jpg'
+import BookingBus from './BookingBus';
+import axios from 'axios';
+
+
 class ShowAvailableBuses extends Component {
     constructor(props) {
         super(props);
         this.state = { 
+            redirect:false,
+            bookedSeats:null,
          }
     }
     componentDidMount(){
@@ -27,8 +33,30 @@ class ShowAvailableBuses extends Component {
         })
         return ans
     }
+    bookseat=(busid,from,to,date)=>{
+        //console.log(busid,from,to,date);
+        let passData={
+            'busid':busid,
+            'from':from,
+            'to':to,
+            'date':date
+        }
+        axios.post('http://localhost:4200/getSeats',{passData}).then((res)=>{
+            this.setState({bookedSeats:res.data})
+            this.setState({redirect:true})
+        })
+    }
+
 
     render() { 
+        if(this.state.redirect){
+            if(sessionStorage.getItem('User')){
+            return <Redirect to={{pathname:'/bookingseat',state:{data:this.props.content,toPlace:this.props.toPlace,toDate:this.props.toDate,bookedSeats:this.state.bookedSeats}}}/>
+            }
+            else{
+                return <Redirect to="/login"/>
+            }
+        }
         return (
             <>
                 <div class="card">
@@ -43,6 +71,7 @@ class ShowAvailableBuses extends Component {
                     </div>
                     <div class="extra" style={{marginBottom:'3%'}}>
                     Rating:  {this.printStar(this.props.content.rating)}
+                    <button style={{float:'right'}} onClick={()=>this.bookseat(this.props.content._id,this.props.content.from,this.props.toPlace,this.props.toDate)}  class="ui button primary button">Book</button>
                     </div>
                 </div>
             </>

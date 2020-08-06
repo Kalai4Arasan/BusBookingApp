@@ -1,0 +1,18 @@
+.tag{
+    background-color: rgb(59, 235, 59);
+    color: white;
+    font-weight: bolder;
+    padding: .5rem;
+    border-radius: 1rem;
+}
+.alert-message2{
+    color:red;
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    margin-top:3%;
+    margin-left: 14%;
+}
+.scrollbar::-webkit-scrollbar-track{
+    background: white;
+}

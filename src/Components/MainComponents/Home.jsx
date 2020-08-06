@@ -4,7 +4,18 @@ import bg from '../../assets/images/bookbg.jpg';
 import noResult from '../../assets/images/noresult.jpg'
 import "./Home.css";
 import ShowAvailableBuses from '../TasksComponents/ShowAvailableBuses';
-import { Link, Redirect, Switch, Route,BrowserRouter as Router } from 'react-router-dom';
+import { Link, Redirect, Switch, Route,BrowserRouter as Router,useLocation } from 'react-router-dom';
+
+
+const Location = () => {
+    let location = useLocation();
+    console.log(location);
+    return <div>Hi</div>
+};
+
+
+
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +31,11 @@ class Home extends Component {
 
         }
     }
+
+    componentWillUnmount(){
+        localStorage.clear()
+    }
+
     handleForm=(e)=>{
         e.preventDefault()
         let name=e.target.name;
@@ -28,23 +44,20 @@ class Home extends Component {
     }
     handleSubmit=(e)=>{
         e.preventDefault()
-        localStorage.removeItem('Result');
-        localStorage.removeItem('ToPlace');
-        localStorage.removeItem('ToDate');
         if(this.state.from===this.state.to){
             this.setState({same:true})
         }
         else{
             this.setState({same:false})
         }
-        if(new Date(this.state.date).getTime()<Date.now()){
+        if(new Date(this.state.date).getTime()<=Date.now()){
             this.setState({checkDate:true})
         }
         else{
             this.setState({checkDate:false})
         }
         //console.log(this.state.checkDate,this.state.same)
-        if(new Date(this.state.date).getTime()>Date.now() && this.state.from!=this.state.to){
+        if(new Date(this.state.date).getTime()>=Date.now() && this.state.from!=this.state.to){
             let Data={'from':this.state.from,'to':this.state.to,'date':this.state.date}
             axios.post('http://localhost:4200/available',{Data}).then((res)=>{
                 if(res.data.length>0){
@@ -58,7 +71,7 @@ class Home extends Component {
                     localStorage.removeItem('Result');
                     localStorage.removeItem('ToPlace');
                     localStorage.removeItem('ToDate');
-                    this.setState({result:null})
+                    this.setState({result:{}})
                     this.setState({NoResult:true})
                 }
             })
@@ -69,7 +82,7 @@ class Home extends Component {
     render() { 
         if(this.state.NoResult===false && this.state.result!=null && Object.keys(this.state.result).length>0){
             return (
-                <div class="ui container" style={{marginTop:'4%'}}>
+                <div class="ui container" style={{marginTop:'4%'}} >
                     <form class="ui form searchForm" onSubmit={this.handleSubmit}>
                             <div class="fields">
                                 <div class="field">
@@ -93,15 +106,13 @@ class Home extends Component {
                             </div>
                             </form>
                     <div class="ui four cards">
-                    {this.state.result.map(item=><ShowAvailableBuses content={item} toPlace={localStorage.getItem('ToPlace')?localStorage.getItem('ToPlace'):this.state.to}/>)}
+                    {this.state.result.map(item=><ShowAvailableBuses content={item} toDate={this.state.date?this.state.date:localStorage.getItem('ToDate')} toPlace={localStorage.getItem('ToPlace')?localStorage.getItem('ToPlace'):this.state.to}/>)}
                     </div>
                 </div>
             )
         }
         else if(this.state.NoResult===false && this.state.result==null){
-            localStorage.removeItem('Result');
-            localStorage.removeItem('ToPlace');
-            localStorage.removeItem('ToDate');
+
         return ( 
             <>
             <img src={bg} style={{display:'flex',marginTop:'-14px',opacity:'.7',height:'550px',width:'100%'}}/>
@@ -143,9 +154,6 @@ class Home extends Component {
          );
         }
         else{
-            localStorage.removeItem('Result');
-            localStorage.removeItem('ToPlace');
-            localStorage.removeItem('ToDate');
             return (
                 <div class="ui container" style={{marginTop:'4%'}}>
                     <form class="ui form searchForm" onSubmit={this.handleSubmit}>
