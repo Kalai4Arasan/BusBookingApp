@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5f1a7b1df9b25d5440e329a7"},"name":"kalai","email":"kalai@gmail.com","password":"123456789","phone":1234567890,"address":"Salem,Tamilnadu","__v":0}
+{"_id":{"$oid":"5f1ba6eebbab993f80c349f8"},"name":"Kalaiyarasan S","email":"kalaisivagi@gmail.com","password":"258258258","phone":8.870385722E+09,"address":"A.Ayyamperumalpatti, Tamil Nadu, India","__v":0}
+{"_id":{"$oid":"5f1ce6d94611640c0c7521a7"},"name":"Elango S","email":"elangova@gmail.com","password":"123456789","phone":8.870385722E+09,"address":"A.Ayyamperumalpatti, Tamil Nadu, India","__v":0}
+{"_id":{"$oid":"5f1fb3074b76b42a1c54048a"},"name":"Mani","email":"mani@gmail.com","password":"147147147","phone":8.870385722E+09,"address":"A.Ayyamperumalpatti, Tamil Nadu, India","__v":0}
+{"_id":{"$oid":"5f2a4258d7b69d25fc36ace1"},"name":null,"email":null,"password":null,"phone":null,"address":null,"__v":0}

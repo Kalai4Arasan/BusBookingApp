@@ -1,0 +1,8 @@
+{"_id":{"$oid":"5f1e7a43e62d06969f69883e"},"busname":"Mahendra","from":"Salem","to":[["Coimbatore",200],["Dharmapuri",150],["Erode",100],["Karur",200]],"type":"AC","rating":4,"images":"Mahendra.jpeg"}
+{"_id":{"$oid":"5f1e7d1a0b4133162481d663"},"busname":"Reeti","from":"Chennai","to":[["Coimbatore",200],["Salem",250],["Erode",100],["Karur",200]],"type":"AC/NonAC","rating":5,"images":"Reeti.jpeg"}
+{"_id":{"$oid":"5f1e7d5b0b4133162481d664"},"busname":"Intercity","from":"Kanyakumari","to":[["Chennai",800],["Salem",650],["Erode",500],["Karur",600]],"type":"NonAC","rating":3,"iimages":"Intercity.jpeg"}
+{"_id":{"$oid":"5f1e84010b4133162481d665"},"busname":"SpeedBus","from":"Chennai","to":[["Coimbatore",200],["Kanyakumari",900],["Erode",100],["Salem",200]],"type":"AC/NonAC","rating":5,"images":"Reeti.jpeg"}
+{"_id":{"$oid":"5f2ad73569a2751e24fe5f9b"},"busname":"KalaiTravels","from":"Chennai","to":[["Coimbatore","300"],["Kanchipuram","400"]],"type":"NonAC","rating":5,"__v":0}
+{"_id":{"$oid":"5f2b623eb8d8483d881679e7"},"busname":"ManiTravels","from":"Dindigul","to":[["Cuddalore","300"],["Erode","300"],["Madurai","100"]],"type":"NonAC","rating":5,"__v":0}
+{"_id":{"$oid":"5f2b62deb8d8483d881679e8"},"busname":"KalaiTravels2","from":"Mayiladuthurai","to":[["Pudukkottai","100"],["Mayiladuthurai","200"],["Perambalur","500"]],"type":"AC","rating":5,"__v":0}
+{"_id":{"$oid":"5f2b66c6b8d8483d881679ea"},"busname":"ExampleBus","from":"Coimbatore","to":[["Madurai","300"],["Salem","200"],["Viluppuram","200"]],"type":"AC","rating":4,"__v":0}
