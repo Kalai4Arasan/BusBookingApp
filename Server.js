@@ -71,20 +71,11 @@ canceledTicketsModel=new Schema({
     rated:Number,
 })
 
-chatModel=new Schema({
-    userid:String,
-    username:String,
-    messages:Array,
-})
-
 var Bus=mongo.model('bus',busModel,'Buses');
 var User = mongo.model('user',userModel,'User');
 var Admin=mongo.model('admin',adminModel,'Admin')
 var Tickets=mongo.model('tickets',ticketsModel,'Tickets')
 var CanceledTickets=mongo.model('canceledtTickets',canceledTicketsModel,'CanceledTickets')
-var Chat=mongo.model('chat',chatModel,'Chats')
-
-
 app.post('/register',(req,res)=>{
     //console.log(req.body)
     iname=req.body.User.username
@@ -313,13 +304,13 @@ app.post('/mail',async (req,res)=>{
     port: 587,
     secure: false, 
     auth: {
-        user: 'hadley90@ethereal.email',
-        pass: '8kcPZM1DP4TRTwut49'
+        user: 'natasha.hettinger@ethereal.email',
+        pass: 'PRFQzacd6Eedw8svwm'
     },
   });
   let info = await transporter.sendMail({
     from: usermail, 
-    to: 'hadley90@ethereal.email', 
+    to: 'natasha.hettinger@ethereal.email', 
     subject: subject, 
     html: content, 
   });
@@ -336,47 +327,8 @@ server=app.listen(process.env.PORT | 4200 ,()=>{
 //Chat with Admin
 //console.log(server)
 const socket=require('socket.io')(server);
-people={}
 socket.on('connect',(e)=>{
     //console.log(e)
-    e.on("JoinRoom",(id,name)=>{
-        Chat.find({userid:id},(err,result)=>{
-            if(result.length==0){
-                chat=new Chat({
-                    userid:id,
-                    username:name,
-                    messages:[],
-                })
-                chat.save()
-            }
-        })
-        e.join(id)
-        people[e.id+'room']=id
-        console.log(name+" Joined in "+id)
-    })
-    e.in(people[e.id+'room']).on('message', (data) => {
-        Chat.updateOne({userid:people[e.id+'room']},
-            { $push: {messages:{'message':data[0],'name':data[1]}}}
-        ,(err,r)=>{
-            console.log(r);
-        })
-        // console.log(data)
-        e.in(people[e.id+'room']).emit('new-message',data);
-      });  
-    e.on('disconnect',()=>{
-        console.log("disconnected")
-    })
+    console.log('Your Now Connected...');
 });
-
-app.get('/messages',(req,res)=>{
-    id=req.query.id
-    Chat.findOne({userid:id},(err,result)=>{
-        return res.send(result.messages)
-    })
-})
-
-app.get('/getChats',(req,res)=>{
-    Chat.find({},(err,result)=>{
-        return res.send(result)
-    })
-})
+ 

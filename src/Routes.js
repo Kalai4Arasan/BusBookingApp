@@ -2,17 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './Components/NavBarComponent/NavBar';
 import HomeAdmin from './Components/AdminComponents/HomeAdmin';
-import NotFound from './Components/MainComponents/NotFound';
-import Home from './Components/MainComponents/Home';
-import BookTickets from './Components/MainComponents/BookTickets';
 import Bookings from './Components/MainComponents/Bookings';
-import HireBus from './Components/MainComponents/HireBus';
-import Login from './Components/AuthComponents/Login';
-import Register from './Components/AuthComponents/Register';
-import Profile from './Components/MainComponents/Profile';
-import BookingBus from './Components/TasksComponents/BookingBus';
-import Success from './Components/TasksComponents/Success';
-import LoginAdmin from './Components/AuthComponents/LoginAdmin';
+import BookedTickets from './Components/MainComponents/BookedTickets';
+import CanceledTickets from './Components/MainComponents/CanceledTickets';
+import OutDatedTickets from './Components/MainComponents/OutDatedTickets';
 
 const Routes = () => (
     <Router>
@@ -30,9 +23,6 @@ const Routes = () => (
             <NavBar/>
         </Route>
         <Route exact path="/bookings">
-            <NavBar/>
-        </Route>
-        <Route exact path="/hirebus">
             <NavBar/>
         </Route>
         <Route exact path="/login">
@@ -60,6 +50,30 @@ const Routes = () => (
             <HomeAdmin/>
         </Route>
         <Route exact path="/showBuses">
+            <HomeAdmin/>
+        </Route>
+        <Route exact path="/bookings">
+            <NavBar/>
+        </Route>
+        <Route exact path="/contactus">
+            <NavBar/>
+        </Route>
+        <Route exact path="/canceledTickets">
+            <NavBar/>
+        </Route>
+        <Route exact path="/outdatedTickets">
+            <NavBar/>
+        </Route>
+        <Route exact path="/mail">
+            <NavBar/>
+        </Route>
+        <Route exact path="/chat">
+            <NavBar/>
+        </Route>
+        <Route exact path="/adminchat">
+            <HomeAdmin/>
+        </Route>
+        <Route exact path="/privateChat">
             <HomeAdmin/>
         </Route>
         </Switch>

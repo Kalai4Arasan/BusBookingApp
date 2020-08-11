@@ -30,6 +30,10 @@ const Success=function(){
                             <td style={{fontWeight:'700'}}>{data.to}</td>
                             </tr>
                             <tr>
+                            <td>TotalRate</td>
+                            <td style={{fontWeight:'700'}}>&#8377; {data.totalrate}</td>
+                            </tr>
+                            <tr>
                             <td>Seats</td>
                             <td style={{fontWeight:'700'}}><tr>{data.seats.map(item=><td>{item}</td>)}</tr></td>
                             </tr>

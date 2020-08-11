@@ -8,14 +8,13 @@ import './NavBar.css'
 import Home from '../MainComponents/Home';
 import Bookings from '../MainComponents/Bookings';
 import HireBus from '../MainComponents/HireBus';
-import BookTickets from '../MainComponents/BookTickets';
 import Login from '../AuthComponents/Login';
 import Register from '../AuthComponents/Register';
 import Profile from '../MainComponents/Profile';
-import ShowAvailableBuses from '../TasksComponents/ShowAvailableBuses';
 import BookingBus from '../TasksComponents/BookingBus';
 import Success from '../TasksComponents/Success';
 import HomeAdmin from '../AdminComponents/HomeAdmin';
+import ContactUs from '../MainComponents/ContactUs';
 // import {ReactComponent as BusLogo} from '../../assets/svg/bus.svg';
 class NavBar extends Component {
     constructor(props) {
@@ -26,6 +25,7 @@ class NavBar extends Component {
         //  console.log(this.state.data)
          this.button=this.state.data==null || Object.keys(this.state.data).length==0 ?
          <span class="ui item">
+
                      <div class="dropdown">
                          <span class="ui " ><i class="user icon"></i>Account </span>
                          <div class="dropdown-content">
@@ -73,6 +73,7 @@ class NavBar extends Component {
             <Link to="/bookings" class="item">
                 Bookings
             </Link>
+            <Link class="item" to="/contactus" >ContactUs</Link>
             <div class="right menu">
                { this.button }
             </div>
@@ -98,6 +99,7 @@ class NavBar extends Component {
                 <Link to="/hirebus" class="item">
                     HireBus
                 </Link>
+                <Link class="item" to="/contactus" >ContactUs</Link>
             <div class="right">
                     <div class="item">
                     { this.button }
@@ -109,14 +111,8 @@ class NavBar extends Component {
             <Route exact path="/">
                  <Home/> 
             </Route>
-            <Route exact path="/booktickets">
-                <BookTickets/>
-            </Route>
             <Route exact path="/bookings">
                 <Bookings/>
-            </Route>
-            <Route exact path="/hirebus">
-                <HireBus/>
             </Route>
             <Route exact path="/login">
                 <Login/>
@@ -132,6 +128,24 @@ class NavBar extends Component {
             </Route>
             <Route exact path="/success">
                 <Success/>
+            </Route>
+            <Route exact path="/bookings">
+                <Bookings/>
+            </Route>
+            <Route exact path="/canceledTickets">
+                <Bookings/>
+            </Route>
+            <Route exact path="/outdatedTickets">
+                <Bookings/>
+            </Route>
+            <Route exact path="/contactus">
+                <ContactUs/>
+            </Route>
+            <Route exact path="/mail">
+                <ContactUs/>
+            </Route>
+            <Route exact path="/chat">
+                <ContactUs/>
             </Route>
             </Switch>
         </Router>

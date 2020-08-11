@@ -10,6 +10,7 @@ import ProfileAdmin from '../MainComponents/ProfileAdmin';
 import AddBus from '../MainComponents/AddBus';
 import Welcome from '../MainComponents/Welcome';
 import ShowBuses from '../MainComponents/showBuses';
+import AdminChat from '../ContactComponent/AdminChat';
 class HomeAdmin extends Component {
     constructor(props) {
         super(props);
@@ -68,6 +69,9 @@ class HomeAdmin extends Component {
             <Link to="/showBuses" class="item">
                     AllBuses
             </Link>
+            <Link to="/adminchat" class="item">
+                    AllChats
+            </Link>
             <div class="right menu">
                { this.button }
             </div>
@@ -90,6 +94,9 @@ class HomeAdmin extends Component {
                 <Link to="/showBuses" class="item">
                     AllBuses
                 </Link>
+                <Link to="/adminchat" class="item">
+                    AllChats
+                </Link>
             <div class="right">
                     <div class="item">
                     { this.button }
@@ -111,6 +118,12 @@ class HomeAdmin extends Component {
             </Route>
             <Route exact path="/showBuses">
                 <ShowBuses/>
+            </Route>
+            <Route exact path="/adminchat">
+            <AdminChat/>
+            </Route>
+            <Route exact path="/privateChat">
+                <AdminChat/>
             </Route>
             </Switch>
         </Router>

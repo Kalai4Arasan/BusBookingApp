@@ -88,6 +88,7 @@ function handleSubmit(e){
         document.getElementById('error').innerHTML="";
         let passData={
             'user':JSON.parse(sessionStorage.getItem('User')).name,
+            'userid':JSON.parse(sessionStorage.getItem('User'))._id,
             'busid':Data.data._id,
             'busname':Data.data.busname,
             'from':Data.data.from,
